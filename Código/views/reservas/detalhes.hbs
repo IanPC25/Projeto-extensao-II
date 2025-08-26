@@ -1,0 +1,107 @@
+<head>
+  <title>Reserva encerrada</title>
+</head>
+
+<div class='content'>
+  <div class='form-wrapper' style='max-width: 1100px'>
+    <a href='/reservas/listar-reservas-encerradas' class='back-button'>Reservas encerradas</a>
+    <h2>Detalhes da reserva encerrada</h2>
+
+    <form id='Form' action='' method='POST'>
+      <div class='item-detail'>
+        <label class='label-detail'>Título:</label>
+        <span class='value-detail'>{{reservaEncerrada.titulo}}</span>
+      </div>
+      <div class='item-detail'>
+        <label class='label-detail'>Objetivo da reserva:</label>
+        <span class='value-detail'>{{reservaEncerrada.objetivo}}</span>
+      </div>
+      <fieldset class='fieldset-detail fieldset-custom'>
+        <legend class='legend-detail'>Responsáveis pela reserva:</legend>
+        {{#if responsaveis.length}}
+          <div class='row-header'>
+            <div class='col col-item'>Nome</div>
+            <div class='col col-item'>Telefone</div>
+            <div class='col col-item'>Celular</div>
+            <div class='col col-item'>Email</div>
+            <div class='col col-item'>Localidade</div>
+          </div>
+        {{else}}
+          <div class='no-registered-detail'>
+            Nenhum responsável foi cadastrado.
+          </div>
+        {{/if}}
+        {{#each responsaveis}}
+          <div class='row'>
+            <div class='col col-item'>{{nome}}</div>
+            <div class='col col-item'>{{telefone}}</div>
+            <div class='col col-item'>{{celular}}</div>
+            <div class='col col-item'>{{email}}</div>
+            <div class='col col-item'>{{cidade}} - {{uf}}</div>
+          </div>
+        {{/each}}
+      </fieldset>
+      <fieldset class='fieldset-detail fieldset-custom'>
+        <legend class='legend-detail'>Períodos da reserva:</legend>
+        {{#if periodos.length}}
+          <div class='row-header'>
+            <div class='col col-item'>Data</div>
+            <div class='col col-item'>Horário</div>
+          </div>
+        {{else}}
+          <div class='no-registered-detail'>
+            Nenhum período foi cadastrado.
+          </div>
+        {{/if}}
+        {{#each periodos}}
+          <div class='row'>
+            <div class='col col-item'>{{formatDate data}}</div>
+            <div class='col col-item'>das
+              {{formatTime horarioInicio}}
+              às
+              {{formatTime horarioTermino}}</div>
+          </div>
+        {{/each}}
+      </fieldset>
+      <fieldset class='fieldset-detail fieldset-custom'>
+        <legend class='legend-detail'>Informações do pagamento:</legend>
+        <div class='item-detail-billing'>
+          <label class='label-detail'>Valor da reserva:</label>
+          <span class='value-detail-billing'>{{reservaEncerrada.valorDaReserva}}</span>
+        </div>
+        {{#if pagamentos.length}}
+          <div class='row-header'>
+            <div class='col col-item'>Data</div>
+            <div class='col col-item'>Responsável</div>
+            <div class='col col-item'>Forma</div>
+            <div class='col col-item'>Valor</div>
+          </div>
+        {{else}}
+          <div class='no-registered-detail'>
+            Nenhum pagamento foi cadastrado.
+          </div>
+        {{/if}}
+        {{#each pagamentos}}
+          <div class='row data-row'>
+            <div class='col col-item'>{{formatDate dataPagamento}}</div>
+            <div class='col col-item'>{{responsavelPagamento}}</div>
+            <div class='col col-item'>{{formaPagamento}}</div>
+            <div class='col col-item'>{{valorPago}}</div>
+          </div>
+        {{/each}}
+      </fieldset>
+      <div class='mb-3'>
+        <label class='label-detail'>Informações complementares:</label>
+        <p class='value-detail'>
+          {{reservaEncerrada.informacoesComplementares}}
+        </p>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Scripts -->
+<script src='https://code.jquery.com/jquery-3.7.0.min.js'></script>
+<link rel='stylesheet' href='https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css' />
+<script src='https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js'></script>
+<script src='/js/datatables.js'></script>
+<script src='/js/input_masks.js'></script>

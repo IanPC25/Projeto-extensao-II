@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <meta charset='UTF-8' />
+    <title>Relatório</title>
+    <style>
+      body {
+        font-family: Arial;
+        margin: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid #000;
+        padding: 8px;
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h2 style='text-align: center;'>
+      Faturamento com eventos promovidos pelo Luz da Lua entre
+      {{formatDate dataInicial}}
+      e
+      {{formatDate dataFinal}}
+    </h2>
+
+    {{#if faturamentosPorTitulo.length}}
+      <table>
+        <thead>
+          <tr>
+            <th style='text-align: center;'>Título</th>
+            <th style='text-align: center;'>Objetivo</th>
+            <th style='text-align: center;'>Tipo Faturamento</th>
+            <th style='text-align: center;'>Faturamento</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each faturamentosPorTitulo}}
+            <tr>
+              <td style='text-align: center;'>{{titulo}}</td>
+              <td style='text-align: center;'>{{objetivo}}</td>
+              <td style='text-align: center;'>{{tipoFaturamento}}</td>
+              <td style='text-align: center;'>{{faturamento}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+      <h3>Faturamento total com Eventos no período: {{totalFaturamentoEventos}}</h3>
+      <div style='margin-left: 40px; font-size:18px;'>Total com ingressos inteira:
+        {{faturamentoTotalIngressosInteira}}</div>
+      <div style='margin-left: 40px; font-size:18px;'>Total com ingressos meia-entrada:
+        {{faturamentoTotalIngressosMeia}}</div>
+      <div style='margin-left: 40px; font-size:18px;'>Total com patrocínios privados:
+        {{faturamentoTotalPatrociniosPrivado}}</div>
+      <div style='margin-left: 40px; font-size:18px;'>Total com patrocínios públicos:
+        {{faturamentoTotalPatrociniosPublico}}</div>
+      <div style='margin-left: 40px; font-size:18px;'>Total com produtos:
+        {{faturamentoTotalProdutos}}</div>
+
+    {{else}}
+      <h3 style='text-align: center; color: red;'>
+        Nenhum evento no período informado.
+      </h3>
+    {{/if}}
+
+  </body>
+</html>

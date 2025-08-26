@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <meta charset='UTF-8' />
+    <title>Relatório</title>
+    <style>
+      body {
+        font-family: Arial;
+        margin: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid #000;
+        padding: 8px;
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <h2 style='text-align: center;'>
+      Faturamentos com reservas do espaço entre
+      {{formatDate dataInicial}}
+      e
+      {{formatDate dataFinal}}
+    </h2>
+
+    {{#if faturamentoReservas.length}}
+      <table>
+        <thead>
+          <tr>
+            <th style='text-align: center;'>Título</th>
+            <th style='text-align: center;'>Objetivo</th>
+            <th style='text-align: center;'>Data pagamento</th>
+            <th style='text-align: center;'>Valor pago</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each faturamentoReservas}}
+            <tr>
+              <td style='text-align: center;'>{{titulo}}</td>
+              <td style='text-align: center;'>{{objetivo}}</td>
+              <td style='text-align: center;'>{{formatDate dataPagamento}}</td>
+              <td style='text-align: center;'>{{valorPago}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      <h3>Faturamento total com reservas no período: {{totalFaturamentoReservas}}</h3>
+    {{else}}
+      <h3 style='text-align: center; color: red;'>
+        Nenhuma reserva no período informado.
+      </h3>
+    {{/if}}
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <meta charset='UTF-8' />
+    <title>Relatório</title>
+    <style>
+      body {
+        font-family: Arial;
+        margin: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid #000;
+        padding: 8px;
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 style='text-align: center;'>Agenda Luz da Lua</h1>
+
+    {{#if agenda.length}}
+      <table>
+        <thead>
+          <tr>
+            <th style='text-align: center;'>Data</th>
+            <th style='text-align: center;'>Horário inicial</th>
+            <th style='text-align: center;'>Horário final</th>
+            <th style='text-align: center;'>Tipo</th>
+            <th style='text-align: center;'>Título</th>
+            <th style='text-align: center;'>Objetivo</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each agenda}}
+            <tr>
+              <td style='text-align: center;'>{{formatDate data}}</td>
+              <td style='text-align: center;'>{{formatTime horarioInicio}}</td>
+              <td style='text-align: center;'>{{formatTime horarioTermino}}</td>
+              <td style='text-align: center;'>{{tipo}}</td>
+              <td style='text-align: center;'>{{titulo}}</td>
+              <td style='text-align: center;'>{{objetivo}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    {{else}}
+      <h3 style='text-align: center; color: red;'>
+        Nenhuma reserva e nenhum evento em andamento.
+      </h3>
+    {{/if}}
+  </body>
+</html>

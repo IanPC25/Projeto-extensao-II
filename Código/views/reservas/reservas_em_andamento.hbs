@@ -1,0 +1,57 @@
+<head>
+  <title>Reservas em andamento</title>
+</head>
+
+<div class='content'>
+  <div class='form-wrapper' style='max-width: 1100px;'>
+    <h2>Reservas em andamento</h2>
+
+    {{#if messages.sucesso}}
+      <div class='alert alert-success alert-dismissible fade show fs-3' role='alert'>
+        {{messages.sucesso}}
+        <button
+          type='button'
+          class='btn-close'
+          data-bs-dismiss='alert'
+          aria-label='Fechar'
+        ></button>
+      </div>
+    {{/if}}
+    <table data-options='[10,25,50,-1]' data-labels='[10,25,50,"Todos"]'>
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Objetivo</th>
+          <th>Valor da reserva</th>
+          <th>Valor Pago</th>
+          <th>Valor pendente</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each reservasEmAndamento}}
+          <tr>
+            <td>{{titulo}}</td>
+            <td>{{objetivo}}</td>
+            <td>{{valorDaReserva}}</td>
+            <td>{{valorQuitadoDaReserva}}</td>
+            <td>{{valorPendenteDaReserva}}</td>
+            <td>
+              <div class='button-group'>
+                <a href='/reservas/gerenciar/{{id}}' class='btn btn-primary'>Gerenciar</a>
+                <form action='/reservas/reserva-em-andamento/remover/{{id}}' method='POST'>
+                  <input type='submit' value='Excluir' class='btn btn-danger' />
+                </form>
+              </div>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- Scripts -->
+<script src='https://code.jquery.com/jquery-3.7.0.min.js'></script>
+<link rel='stylesheet' href='https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css' />
+<script src='https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js'></script>
+<script src='/js/datatables.js'></script>

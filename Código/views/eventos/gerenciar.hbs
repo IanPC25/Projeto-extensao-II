@@ -1,0 +1,774 @@
+<head>
+  <title>Gerenciando evento</title>
+</head>
+
+<div class='content'>
+  <div class='form-wrapper'>
+    <h2>Gerenciar evento Luz da Lua</h2>
+    <!-- Mensagens de erros-->
+    {{#if messages.erros}}
+      <div class='alert alert-danger alert-dismissible fade show fs-3' role='alert'>
+        {{{messages.erros}}}
+        <button
+          type='button'
+          class='btn-close'
+          data-bs-dismiss='alert'
+          aria-label='Fechar'
+        ></button>
+      </div>
+    {{/if}}
+
+    <!-- Mensagens de sucessos-->
+    {{#if messages.sucesso}}
+      <div class='alert alert-success alert-dismissible fade show fs-3' role='alert'>
+        {{messages.sucesso}}
+        <button
+          type='button'
+          class='btn-close'
+          data-bs-dismiss='alert'
+          aria-label='Fechar'
+        ></button>
+      </div>
+    {{/if}}
+
+    <ul class='nav nav-tabs' id='formTabs' role='tablist'>
+      <li class='nav-item' role='presentation'>
+        <button
+          class='nav-link active'
+          id='aba1-tab'
+          data-bs-toggle='tab'
+          data-bs-target='#aba_editar'
+          type='button'
+          role='tab'
+        >
+          Edição
+        </button>
+      </li>
+
+      <li class='nav-item' role='presentation'>
+        <button
+          class='nav-link'
+          id='aba2-tab'
+          data-bs-toggle='tab'
+          data-bs-target='#aba_periodo'
+          type='button'
+          role='tab'
+        >
+          Períodos
+        </button>
+      </li>
+
+      <li class='nav-item' role='presentation'>
+        <button
+          class='nav-link'
+          id='aba1-tab'
+          data-bs-toggle='tab'
+          data-bs-target='#aba_venda_de_ingressos'
+          type='button'
+          role='tab'
+        >
+          Venda de ingressos
+        </button>
+      </li>
+
+      <li class='nav-item' role='presentation'>
+        <button
+          class='nav-link'
+          id='aba2-tab'
+          data-bs-toggle='tab'
+          data-bs-target='#aba_doacao_ingressos'
+          type='button'
+          role='tab'
+        >
+          Doação de ingressos
+        </button>
+      </li>
+
+      <li class='nav-item' role='presentation'>
+        <button
+          class='nav-link'
+          id='aba2-tab'
+          data-bs-toggle='tab'
+          data-bs-target='#aba_patrocinio'
+          type='button'
+          role='tab'
+        >
+          Patrocínio
+        </button>
+      </li>
+
+      <li class='nav-item' role='presentation'>
+        <button
+          class='nav-link'
+          id='aba2-tab'
+          data-bs-toggle='tab'
+          data-bs-target='#aba_produtos_vendidos'
+          type='button'
+          role='tab'
+        >
+          Produtos vendidos
+        </button>
+      </li>
+
+      <li class='nav-item' role='presentation'>
+        <button
+          class='nav-link'
+          id='aba3-tab'
+          data-bs-toggle='tab'
+          data-bs-target='#aba_encerrar'
+          type='button'
+          role='tab'
+        >
+          Encerrar
+        </button>
+      </li>
+    </ul>
+
+    <div class='tab-content p-3 border border-top-0' id='formTabsContent'>
+      <div class='tab-pane fade show active' id='aba_editar' role='tabpanel'>
+        <form id='Form' action='/eventos/editar' method='POST'>
+          <input type='hidden' name='eventoId' value={{eventoId}} />
+          <div class='mb-3'>
+            <label for='titulo' class='form-label'>Título:</label>
+            <input
+              type='text'
+              name='titulo'
+              class='form-control'
+              placeholder='Informe o título'
+              value='{{evento.titulo}}'
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='objetivo' class='form-label'>Objetivo:</label>
+            <select class='form-select form-control' name='objetivo'>
+              <option value='{{evento.objetivo}}'>{{evento.objetivo}}</option>
+              <option value='Filme'>Filme</option>
+              <option value='Palestra'>Palestra</option>
+              <option value='Show'>Show</option>
+              <option value='Teatro'>Teatro</option>
+            </select>
+          </div>
+          <div class='mb-3'>
+            <label for='valorDoIngressoInteira' class='form-label'>Valor do ingresso:</label>
+            <input
+              type='text'
+              name='valorIngressoInteira'
+              class='form-control valor'
+              placeholder='Informe o valor do ingresso'
+              value='{{evento.valorIngressoInteira}}'
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='valorDoIngressoInteira' class='form-label'>Valor ingresso meia entrada:</label>
+            <input
+              type='text'
+              name='valorIngressoMeiaEntrada'
+              class='form-control valor'
+              placeholder='Informe o valor do ingresso'
+              value='{{evento.valorIngressoMeiaEntrada}}'
+              disabled
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='qtdIngressosParaVendaDisponibilizados' class='form-label'>Quantidade de
+              ingressos pagos disponibilizados:</label>
+            <input
+              type='text'
+              name='qtdIngressosParaVendaDisponibilizados'
+              class='form-control valor-inteiro'
+              placeholder='Informe a quantidade'
+              value='{{evento.qtdIngressosParaVendaDisponibilizados}}'
+              disabled
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='qtdIngressosGratuitosDisponibilizados' class='form-label'>Quantidade de
+              ingressos gratuitos disponibilizados:</label>
+            <input
+              type='text'
+              name='qtdIngressosGratuitosDisponibilizados'
+              class='form-control valor-inteiro'
+              placeholder='Informe a quantidade'
+              value='{{evento.qtdIngressosGratuitosDisponibilizados}}'
+              disabled
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='informacoesComplementares' class='form-label'>Informações complementares:</label>
+            <textarea
+              name='informacoesComplementares'
+              rows='20'
+              class='form-control'
+              style='border: 1px solid black; height: 100px;'
+              placeholder='Informe as informações complementares(Opcional)'
+            >{{evento.informacoesComplementares}}</textarea>
+          </div>
+          <div>
+            <button type='submit' class='button-editar'>Editar</button>
+          </div>
+        </form>
+      </div>
+
+      <div class='tab-pane fade' id='aba_periodo' role='tabpanel'>
+        <form id='Form' action='/periodos/adicionar-para-evento' method='POST'>
+          <input type='hidden' name='eventoId' value={{eventoId}} />
+          <div class='mb-3'>
+            <label for='data' class='form-label'>Data:</label>
+            <input type='date' class='form-control' name='data' value='{{periodo.data}}' />
+          </div>
+          <div class='mb-3'>
+            <label for='horarioInicio' class='form-label'>Horário de início:</label>
+            <input
+              type='time'
+              class='form-control'
+              name='horarioInicio'
+              value='{{periodo.horarioInicio}}'
+              step='60'
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='horarioTermino' class='form-label'>Horário de término:</label>
+            <input
+              type='time'
+              class='form-control'
+              name='horarioTermino'
+              value='{{periodo.horarioTermino}}'
+              step='60'
+            />
+          </div>
+          <div>
+            <button type='submit' class='button-cadastrar'>Cadastrar</button>
+          </div>
+        </form>
+        {{#if periodos.length}}
+          <div class='col-12 title-center'>Períodos</div>
+          <div class='row data-row' style='font-weight: bold;'>
+            <div class='col col-item'>Data</div>
+            <div class='col col-item'>Horário</div>
+            <div class='col col-item'></div>
+          </div>
+        {{else}}
+          <div class='no-registered-detail'>
+            Nenhum período cadastrado.
+          </div>
+        {{/if}}
+        {{#each periodos}}
+          <div class='row data-row'>
+            <div class='col col-item'>{{formatDate data}}</div>
+            <div class='col col-item'>das
+              {{formatTime horarioInicio}}
+              às
+              {{formatTime horarioTermino}}</div>
+            <div class='col col-item'>
+              <form
+                action='/periodos/remover-do-evento/{{id}}'
+                method='POST'
+                style='display:inline;'
+              >
+                <input type='hidden' name='eventoId' value='{{eventoId}}' />
+                <button type='submit' class='btn btn-link' style='font-size: 25px;'>
+                  Excluir
+                </button>
+              </form>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+
+      <div class='tab-pane fade' id='aba_venda_de_ingressos' role='tabpanel'>
+        <form id='Form' action='/eventos/venda-ingressos/adicionar' method='POST'>
+          <input type='hidden' name='eventoId' value={{eventoId}} />
+          <div class='mb-3'>
+            <label for='valorIngressoInteira' class='form-label'>Valor do ingresso:</label>
+            <input
+              type='text'
+              name='valorIngressoInteira'
+              class='form-control'
+              value='{{evento.valorIngressoInteira}}'
+              disabled
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='qtdIngressosVendidos' class='form-label'>Quantidade de ingressos vendidos:</label>
+            <input
+              type='text'
+              name='qtdIngressosVendidos'
+              class='form-control'
+              value='{{evento.qtdIngressosVendidos}}'
+              disabled
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='qtdIngressosParaVendaDisponiveis' class='form-label'>Quantidade de ingressos
+              disponíveis:</label>
+            <input
+              type='text'
+              name='qtdIngressosParaVendaDisponiveis'
+              class='form-control'
+              value='{{evento.qtdIngressosParaVendaDisponiveis}}'
+              disabled
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='nomeCliente' class='form-label'>Nome do cliente:</label>
+            <input
+              type='text'
+              name='nomeCliente'
+              class='form-control'
+              placeholder='Informe o nome do cliente'
+              value='{{vendaIngresso.nomeCliente}}'
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='tipoIngresso' class='form-label'>Tipo de ingresso:</label>
+            <select class='form-select form-control' name='tipoIngresso'>
+              <option value='Inteira' selected>Inteira</option>
+              <option value='Meia'>Meia</option>
+            </select>
+          </div>
+          <div class='mb-3'>
+            <label for='qtdIngressosVendidos' class='form-label'>Quantidade de ingressos vendidos:</label>
+            <input
+              type='text'
+              name='qtdIngressosVendidos'
+              class='form-control valor-inteiro'
+              placeholder='Informe a quantidade de ingressos vendidos'
+              value='{{vendaIngresso.qtdIngressosVendidos}}'
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='dataVenda' class='form-label'>Data da compra:</label>
+            <input
+              type='date'
+              class='form-control'
+              name='dataVenda'
+              value='{{vendaIngresso.dataVenda}}'
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='formaPagamento' class='form-label'>Forma de pagamento:</label>
+            <select class='form-select form-control' name='formaPagamento'>
+              <option value='-1' selected disabled>Selecione uma forma de pagamento</option>
+              <option value='Dinheiro'>Dinheiro</option>
+              <option value='Pix'>Pix</option>
+              <option value='Debito'>Débito</option>
+              <option value='Credito'>Crédito</option>
+            </select>
+          </div>
+          <div>
+            <button type='submit' class='button-cadastrar'>Cadastrar</button>
+          </div>
+        </form>
+        {{#if vendasIngressos.length}}
+          <div class='col-12 title-center'>Vendas de ingressos realizadas</div>
+          <div class='row data-row' style='font-weight: bold;'>
+            <div class='col col-item'>Data</div>
+            <div class='col col-item'>Cliente</div>
+            <div class='col col-item'>Valor ingresso</div>
+            <div class='col col-item'>Quantid.</div>
+            <div class='col col-item'>Faturamento</div>
+            <div class='col col-item'></div>
+          </div>
+        {{else}}
+          <div class='no-registered-detail'>
+            Nenhuma venda de ingressos cadastrada.
+          </div>
+        {{/if}}
+        {{#each vendasIngressos}}
+          <div class='row data-row'>
+            <div class='col col-item'>{{formatDate dataVenda}}</div>
+            <div class='col col-item'>{{nomeCliente}} <br /> {{tipoIngresso}}</div>
+            <div class='col col-item'>{{ValorDoIngressoNaVenda}}</div>
+            <div class='col col-item'>{{qtdIngressosVendidos}}</div>
+            <div class='col col-item'>{{valorTotalDaVenda}} <br /> {{formaPagamento}}</div>
+            <div class='col col-item'>
+              <form
+                action='/eventos/venda-ingressos/remover/{{id}}'
+                method='POST'
+                style='display:inline;'
+              >
+                <input type='hidden' name='eventoId' value='{{eventoId}}' />
+                <button type='submit' class='btn btn-link' style='font-size: 25px;'>
+                  Excluir
+                </button>
+              </form>
+            </div>
+          </div>
+        {{/each}}
+
+      </div>
+
+      <div class='tab-pane fade' id='aba_doacao_ingressos' role='tabpanel'>
+        <form id='Form' action='/eventos/doacao-ingressos/adicionar' method='POST'>
+          <input type='hidden' name='eventoId' value={{eventoId}} />
+          <div class='mb-3'>
+            <label for='qtdIngressosGratuitosDisponibilizados' class='form-label'>Ingressos
+              gratuitos disponibilizados:</label>
+            <input
+              type='text'
+              name='qtdIngressosGratuitosDisponibilizados'
+              class='form-control'
+              value='{{evento.qtdIngressosGratuitosDisponibilizados}}'
+              disabled
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='qtdIngressosDoados' class='form-label'>Total de ingressos gratuitos doados:</label>
+            <input
+              type='text'
+              name='qtdIngressosDoados'
+              class='form-control'
+              value='{{evento.qtdIngressosDoados}}'
+              disabled
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='qtdIngressosGratuitosDisponiveis' class='form-label'>Ingressos gratuitos
+              disponíveis:</label>
+            <input
+              type='text'
+              name='qtdIngressosGratuitosDisponiveis'
+              class='form-control'
+              value='{{evento.qtdIngressosGratuitosDisponiveis}}'
+              disabled
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='data' class='form-label'>Data da doação dos ingressos:</label>
+            <input
+              type='date'
+              class='form-control'
+              name='dataDoacao'
+              value='{{doacaoIngresso.dataDoacao}}'
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='nomeLocalContemplado' class='form-label'>Local contemplado:</label>
+            <input
+              type='text'
+              name='nomeLocalContemplado'
+              class='form-control'
+              placeholder='Informe o local que recebeu os ingressos'
+              value='{{doacaoIngresso.nomeLocalContemplado}}'
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='responsavelPelaDistribuicao' class='form-label'>Responsável:</label>
+            <input
+              type='text'
+              name='responsavelPelaDistribuicao'
+              class='form-control'
+              placeholder='Informe o nome do responsável pela distribuição dos ingressos'
+              value='{{doacaoIngresso.responsavelPelaDistribuicao}}'
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='telefoneResponsavelPelaDistribuicao' class='form-label'>Telefone:</label>
+            <input
+              type='text'
+              name='telefoneResponsavelPelaDistribuicao'
+              class='form-control'
+              placeholder='Informe o telefone do responsável pela distribuição dos ingressos'
+              value='{{doacaoIngresso.telefoneResponsavelPelaDistribuicao}}'
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='celularResponsavelPelaDistribuicao' class='form-label'>Celular:</label>
+            <input
+              type='text'
+              name='celularResponsavelPelaDistribuicao'
+              class='form-control'
+              placeholder='Informe o celular do responsável pela distribuição dos ingressos'
+              value='{{doacaoIngresso.celularResponsavelPelaDistribuicao}}'
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='qtdIngressosDoados' class='form-label'>Quantidade ingressos fornecidos:</label>
+            <input
+              type='text'
+              name='qtdIngressosDoados'
+              class='form-control valor-inteiro'
+              placeholder='Informe a quantidade de ingressos doados'
+              value='{{doacaoIngresso.qtdIngressosDoados}}'
+            />
+          </div>
+          <div>
+            <button type='submit' class='button-cadastrar'>Cadastrar</button>
+          </div>
+        </form>
+        {{#if doacaoIngressos.length}}
+          <div class='col-12 title-center'>Doações de ingressos realizados</div>
+          <div class='row data-row' style='font-weight: bold;'>
+            <div class='col col-item'>Data doação</div>
+            <div class='col col-item'>Local e reponsável</div>
+            <div class='col col-item'>Contatos</div>
+            <div class='col col-item'>Ingressos doados</div>
+            <div class='col col-item'></div>
+          </div>
+        {{else}}
+          <div class='no-registered-detail'>
+            Nenhuma doação cadastrada.
+          </div>
+        {{/if}}
+        {{#each doacaoIngressos}}
+          <div class='row data-row'>
+            <div class='col col-item'>{{formatDate dataDoacao}}</div>
+            <div class='col col-item'>{{nomeLocalContemplado}}
+              <br />
+              {{responsavelPelaDistribuicao}}</div>
+            <div class='col col-item'>{{telefoneResponsavelPelaDistribuicao}}
+              <br />
+              {{celularResponsavelPelaDistribuicao}}</div>
+            <div class='col col-item'>{{qtdIngressosDoados}}</div>
+            <div class='col col-item'>
+              <form
+                action='/eventos/doacao-ingressos/remover/{{id}}'
+                method='POST'
+                style='display:inline;'
+              >
+                <input type='hidden' name='eventoId' value='{{eventoId}}' />
+                <button type='submit' class='btn btn-link' style='font-size: 25px;'>
+                  Excluir
+                </button>
+              </form>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+
+      <div class='tab-pane fade' id='aba_patrocinio' role='tabpanel'>
+        <form id='Form' action='/eventos/patrocinios/adicionar' method='POST'>
+          <input type='hidden' name='eventoId' value={{eventoId}} />
+          <div class='mb-3'>
+            <label for='tipoPatrocinio' class='form-label'>Tipo patrocínio:</label>
+            <select class='form-select form-control' name='tipoPatrocinio'>
+              <option value='-1' selected disabled>Selecione um tipo de patrocínio</option>
+              <option value='Privado'>Privado</option>
+              <option value='Publico'>Público</option>
+            </select>
+          </div>
+          <div class='mb-3'>
+            <label for='entidadePatrocinadora' class='form-label'>Entidade:</label>
+            <input
+              type='text'
+              name='entidadePatrocinadora'
+              class='form-control'
+              placeholder='Informe a entidade patrocinadora'
+              value='{{patrocinio.entidadePatrocinadora}}'
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='valorPatrocinio' class='form-label'>Valor do patrocínio:</label>
+            <input
+              type='text'
+              name='valorPatrocinio'
+              class='form-control valor'
+              placeholder='Informe o valor do patrocínio'
+              value='{{patrocinio.valorPatrocinio}}'
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='dataPagamento' class='form-label'>Data do pagamento:</label>
+            <input
+              type='date'
+              class='form-control'
+              name='dataPagamento'
+              value='{{patrocinio.dataPagamento}}'
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='formaPagamento' class='form-label'>Forma de pagamento:</label>
+            <select class='form-select form-control' name='formaPagamento'>
+              <option value='-1' selected disabled>Selecione uma forma de pagamento</option>
+              <option value='Dinheiro'>Dinheiro</option>
+              <option value='Pix'>Pix</option>
+              <option value='Debito'>Débito</option>
+              <option value='Credito'>Crédito</option>
+            </select>
+          </div>
+          <div class='mb-3'>
+            <label for='responsavelPeloPatrocinio ' class='form-label'>Responsável:</label>
+            <input
+              type='text'
+              name='responsavelPeloPatrocinio'
+              class='form-control'
+              placeholder='Informe o nome do reponsável pelo patrocínio'
+              value='{{patrocinio.responsavelPeloPatrocinio}}'
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='telefonePatrocinador' class='form-label'>Telefone:</label>
+            <input
+              type='text'
+              name='telefonePatrocinador'
+              class='form-control'
+              placeholder='Informe o telefone do reponsável pelo patrocínio'
+              value='{{patrocinio.telefonePatrocinador}}'
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='celularPatrocinador' class='form-label'>Celular:</label>
+            <input
+              type='text'
+              name='celularPatrocinador'
+              class='form-control'
+              placeholder='Informe o celular do reponsável pelo patrocínio'
+              value='{{patrocinio.celularPatrocinador}}'
+            />
+          </div>
+          <div>
+            <button type='submit' class='button-cadastrar'>Cadastrar</button>
+          </div>
+        </form>
+        {{#if patrocinios.length}}
+          <div class='col-12 title-center'>Patrocínios conquistados</div>
+          <div class='row data-row' style='font-weight: bold;'>
+            <div class='col col-item'>Entidade</div>
+            <div class='col col-item'>Pagamento</div>
+            <div class='col col-item'>Contatos</div>
+            <div class='col col-item'></div>
+          </div>
+        {{else}}
+          <div class='no-registered-detail'>
+            Nenhum patrocínio cadastrado.
+          </div>
+        {{/if}}
+        {{#each patrocinios}}
+          <div class='row data-row'>
+            <div class='col col-item'>{{entidadePatrocinadora}}
+              <br />
+              {{tipoPatrocinio}}
+              <br />
+              {{responsavelPeloPatrocinio}}</div>
+            <div class='col col-item'>{{valorPatrocinio}}
+              <br />
+              {{formatDate dataPagamento}}
+              <br />
+              {{formaPagamento}}</div>
+            <div class='col col-item'>{{telefonePatrocinador}} <br /> {{celularPatrocinador}}</div>
+            <div class='col col-item'>
+              <form
+                action='/eventos/patrocinios/remover/{{id}}'
+                method='POST'
+                style='display:inline;'
+              >
+                <input type='hidden' name='eventoId' value='{{eventoId}}' />
+                <button type='submit' class='btn btn-link' style='font-size: 25px;'>
+                  Excluir
+                </button>
+              </form>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+
+      <div class='tab-pane fade' id='aba_produtos_vendidos' role='tabpanel'>
+        <form id='Form' action='/eventos/produtos/adicionar' method='POST'>
+          <input type='hidden' name='eventoId' value={{eventoId}} />
+          <div class='mb-3'>
+            <label for='tipoProduto' class='form-label'>Tipo de produto:</label>
+            <select class='form-select form-control' name='tipoProduto'>
+              <option value='-1' selected disabled>Selecione um tipo de produto</option>
+              <option value='Alimentação'>Alimentação</option>
+              <option value='Apetrecho'>Apetrecho</option>
+              <option value='Brinquedo'>Brinquedo</option>
+              <option value='Cerveja'>Cerveja</option>
+              <option value='Decoração'>Decoração</option>
+              <option value='Livro'>Livro</option>
+              <option value='Refrigerante'>Refrigerante</option>
+              <option value='Roupa'>Roupa</option>
+            </select>
+          </div>
+          <div class='mb-3'>
+            <label for='nomeProduto' class='form-label'>Nome:</label>
+            <input
+              type='text'
+              name='nomeProduto'
+              class='form-control'
+              placeholder='Informe o nome do produto'
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='precoVenda' class='form-label'>Preço de venda:</label>
+            <input
+              type='text'
+              name='precoVenda'
+              class='form-control valor'
+              placeholder='Informe o preço de venda do produto'
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='dataVendas' class='form-label'>Data das vendas realizadas:</label>
+            <input type='date' class='form-control' name='dataVendas' />
+          </div>
+          <div class='mb-3'>
+            <label for='qtdUnidadesVendidas' class='form-label'>Quantidade de unidades vendidas:</label>
+            <input
+              type='text'
+              name='qtdUnidadesVendidas'
+              class='form-control valor-inteiro'
+              placeholder='Informe a quantidade de unidades vendidas'
+            />
+          </div>
+          <div>
+            <button type='submit' class='button-cadastrar'>Cadastrar</button>
+          </div>
+        </form>
+        {{#if produtos.length}}
+          <div class='col-12 title-center'>Produtos vendidos</div>
+          <div class='row data-row' style='font-weight: bold;'>
+            <div class='col col-item'>Data das vendas</div>
+            <div class='col col-item'>Produto</div>
+            <div class='col col-item'>Preço</div>
+            <div class='col col-item'>Qtd. vendida</div>
+            <div class='col col-item'>Faturamento</div>
+            <div class='col col-item'></div>
+          </div>
+        {{else}}
+          <div class='no-registered-detail'>
+            Nenhum produto cadastrado.
+          </div>
+        {{/if}}
+        {{#each produtos}}
+          <div class='row data-row'>
+            <div class='col col-item'>{{formatDate dataVendas}}</div>
+            <div class='col col-item'>{{nomeProduto}} <br /> {{tipoProduto}}</div>
+            <div class='col col-item'>{{precoVenda}}</div>
+            <div class='col col-item'>{{qtdUnidadesVendidas}}</div>
+            <div class='col col-item'>{{valorFaturado}}</div>
+            <div class='col col-item'>
+              <form action='/eventos/produtos/remover/{{id}}' method='POST' style='display:inline;'>
+                <input type='hidden' name='eventoId' value='{{eventoId}}' />
+                <button type='submit' class='btn btn-link' style='font-size: 25px;'>
+                  Excluir
+                </button>
+              </form>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+
+      <div class='tab-pane fade' id='aba_encerrar' role='tabpanel'>
+        <div id='link-description-close'>
+          <h4 id='link-close'>
+            Clique no link abaixo para encerrar a alocação.
+          </h4>
+          <form action='/eventos/encerrar/{{eventoId}}' method='POST' style='display:inline;'>
+            <button type='submit' class='btn btn-link' style='font-size: 25px;'>
+              Encerrar
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src='https://code.jquery.com/jquery-3.7.0.min.js'></script>
+<link rel='stylesheet' href='https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css' />
+<script src='https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js'></script>
+<script src='/js/pagination.js'></script>
+<script src='/js/input_masks.js'></script>
+<script src='/js/onlyFloatInput.js'></script>
+<script src='/js/onlyIntegerInput.js'></script>

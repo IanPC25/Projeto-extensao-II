@@ -1,0 +1,220 @@
+<head>
+  <title>Evento encerrado</title>
+</head>
+
+<div class='content'>
+  <div class='form-wrapper' style='max-width: 1100px'>
+    <a href='/eventos/listar-eventos-encerrados' class='back-button'>Eventos encerrados</a>
+    <h2>Detalhes do evento encerrado</h2>
+
+    <form id='Form' action='' method='POST'>
+      <div class='item-detail'>
+        <label class='label-detail'>Título:</label>
+        <span class='value-detail'>{{eventoEncerrado.titulo}}</span>
+      </div>
+      <div class='item-detail'>
+        <label class='label-detail'>Objetivo do evento:</label>
+        <span class='value-detail'>{{eventoEncerrado.objetivo}}</span>
+      </div>
+      <fieldset class='fieldset-detail fieldset-custom'>
+        <legend class='legend-detail'>Períodos do evento:</legend>
+        {{#if periodos.length}}
+          <div class='row-header'>
+            <div class='col col-item'>Data</div>
+            <div class='col col-item'>Horário</div>
+          </div>
+        {{else}}
+          <div class='no-registered-detail'>
+            Nenhum período foi cadastrado.
+          </div>
+        {{/if}}
+        {{#each periodos}}
+          <div class='row'>
+            <div class='col col-item'>{{formatDate data}}</div>
+            <div class='col col-item'>das
+              {{formatTime horarioInicio}}
+              às
+              {{formatTime horarioTermino}}</div>
+          </div>
+        {{/each}}
+      </fieldset>
+      <fieldset class='fieldset-detail fieldset-custom'>
+        <legend class='legend-detail'>Faturamento na venda de ingressos:</legend>
+
+        {{#if faturamentosComIngressos.quantidadeTotalIngressos}}
+          <div class='row-header'>
+            <div class='col col-item'>Tipo</div>
+            <div class='col col-item'>Quantidade Vendida</div>
+            <div class='col col-item'>Faturamento</div>
+          </div>
+          <div class='row'>
+            <div class='col col-item'>Inteira</div>
+            <div class='col col-item'>{{faturamentosComIngressos.quantidadeInteira}}</div>
+            <div class='col col-item'>{{faturamentosComIngressos.faturamentoTotalComInteira}}</div>
+          </div>
+          <div class='row'>
+            <div class='col col-item'>Meia</div>
+            <div class='col col-item'>{{faturamentosComIngressos.quantidadeMeia}}</div>
+            <div class='col col-item'>{{faturamentosComIngressos.faturamentoTotalComMeia}}</div>
+          </div>
+          <div class='row'>
+            <div class='col col-item' style='font-weight: bold;'>Total</div>
+            <div
+              class='col col-item'
+              style='font-weight: bold;'
+            >{{faturamentosComIngressos.quantidadeTotalIngressos}}</div>
+            <div
+              class='col col-item'
+              style='font-weight: bold;'
+            >{{faturamentosComIngressos.faturamentoTotal}}</div>
+          </div>
+
+        {{else}}
+          <div class='no-registered-detail'>
+            Nenhum ingresso vendido.
+          </div>
+        {{/if}}
+
+      </fieldset>
+      <fieldset class='fieldset-detail fieldset-custom'>
+        <legend class='legend-detail'>Doação de ingressos:</legend>
+        <div class='item-detail-billing'>
+          <label class='label-detail'>Ingressos gratuitos disponibilizados:</label>
+          <span
+            class='value-detail-billing'
+          >{{eventoEncerrado.qtdIngressosGratuitosDisponibilizados}}</span>
+        </div>
+        <div class='item-detail-billing'>
+          <label class='label-detail'>Ingressos gratuitos doados:</label>
+          <span class='value-detail-billing'>{{eventoEncerrado.qtdIngressosDoados}}</span>
+        </div>
+        <br />
+        {{#if doacaoIngressos.length}}
+          <div class='row-header'>
+            <div class='col col-item'>Data doação</div>
+            <div class='col col-item'>Local contemplado</div>
+            <div class='col col-item'>Responsável</div>
+            <div class='col col-item'>Contato</div>
+            <div class='col col-item'>Ingressos doados</div>
+          </div>
+        {{else}}
+          <div class='no-registered-detail'>
+            Nenhuma doação realizada.
+          </div>
+        {{/if}}
+        {{#each doacaoIngressos}}
+          <div class='row data-row'>
+            <div class='col col-item'>{{formatDate dataDoacao}}</div>
+            <div class='col col-item'>{{nomeLocalContemplado}}</div>
+            <div class='col col-item'>{{responsavelPelaDistribuicao}}</div>
+            <div class='col col-item'>{{telefoneResponsavelPelaDistribuicao}}
+              <br />{{celularResponsavelPelaDistribuicao}}</div>
+            <div class='col col-item'>{{qtdIngressosDoados}}</div>
+          </div>
+        {{/each}}
+      </fieldset>
+      <fieldset class='fieldset-detail fieldset-custom'>
+        <legend class='legend-detail'>Patrocínios:</legend>
+
+        {{#if faturamentosComPatrocinios.quantidadeTotal}}
+          <div class='row-header'>
+            <div class='col col-item'>Tipo</div>
+            <div class='col col-item'>Quantidade</div>
+            <div class='col col-item'>Faturamento</div>
+          </div>
+          <div class='row'>
+            <div class='col col-item'>Privado</div>
+            <div class='col col-item'>{{faturamentosComPatrocinios.quantidadePrivado}}</div>
+            <div class='col col-item'>{{faturamentosComPatrocinios.patrocinioPrivado}}</div>
+          </div>
+          <div class='row'>
+            <div class='col col-item'>Público</div>
+            <div class='col col-item'>{{faturamentosComPatrocinios.quantidadePublico}}</div>
+            <div class='col col-item'>{{faturamentosComPatrocinios.patrocinioPublico}}</div>
+          </div>
+          <div class='row'>
+            <div class='col col-item' style='font-weight: bold;'>Total</div>
+            <div
+              class='col col-item'
+              style='font-weight: bold;'
+            >{{faturamentosComPatrocinios.quantidadeTotal}}</div>
+            <div
+              class='col col-item'
+              style='font-weight: bold;'
+            >{{faturamentosComPatrocinios.totalPatrocinios}}</div>
+          </div>
+          <br />
+          <br />
+
+        {{else}}
+          <div class='no-registered-detail'>
+            Nenhum patrocínio conquistado.
+          </div>
+        {{/if}}
+
+        {{#if patrocinios.length}}
+          <div class='row-header'>
+            <div class='col col-item'>Entidade</div>
+            <div class='col col-item'>Pagamento</div>
+            <div class='col col-item'>Contato</div>
+          </div>
+        {{/if}}
+        {{#each patrocinios}}
+          <div class='row data-row'>
+            <div class='col col-item'>{{entidadePatrocinadora}}
+              -
+              {{tipoPatrocinio}}
+              <br />
+              {{responsavelPeloPatrocinio}}</div>
+            <div class='col col-item'>{{valorPatrocinio}}
+              -
+              {{formatDate dataPagamento}}
+              <br />
+              {{formaPagamento}}
+            </div>
+            <div class='col col-item'>{{telefonePatrocinador}} <br /> {{celularPatrocinador}}</div>
+          </div>
+        {{/each}}
+      </fieldset>
+      <fieldset class='fieldset-detail fieldset-custom'>
+        <legend class='legend-detail'>Produtos vendidos:</legend>
+        {{#if faturamentosComProdutos.produtos.length}}
+          <div class='row-header'>
+            <div class='col col-item'>Tipo</div>
+            <div class='col col-item'>Qtd. Unidades</div>
+            <div class='col col-item'>Faturamento</div>
+          </div>
+        {{else}}
+          <div class='no-registered-detail'>
+            Nenhum produto informado.
+          </div>
+        {{/if}}
+        {{#each faturamentosComProdutos.produtos}}
+          <div class='row'>
+            <div class='col col-item'>{{tipoProduto}}</div>
+            <div class='col col-item'>{{quantidade}}</div>
+            <div class='col col-item'>{{valorFaturado}}</div>
+          </div>
+        {{/each}}
+        <br />
+        <div class='item-detail-billing'>
+          <label class='label-detail'>Faturamento total com produtos:</label>
+          <span class='value-detail-billing'>{{faturamentosComProdutos.valorFaturadoTotal}}</span>
+        </div>
+
+      </fieldset>
+      <div class='mb-3'>
+        <label class='label-detail'>Informações complementares:</label>
+        <p class='value-detail'>
+          {{eventoEncerrado.informacoesComplementares}}
+        </p>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Scripts -->
+<script src='https://code.jquery.com/jquery-3.7.0.min.js'></script>
+<link rel='stylesheet' href='https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css' />
+<script src='https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js'></script>
+<script src='/js/datatables.js'></script>
+<script src='/js/input_masks.js'></script>

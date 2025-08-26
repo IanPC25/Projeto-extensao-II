@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <meta charset='UTF-8' />
+    <title>Relatório</title>
+    <style>
+      body {
+        font-family: Arial;
+        margin: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid #000;
+        padding: 8px;
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h2 style='text-align: center;'>
+      Faturamento discriminado das vendas de produtos em eventos entre
+      {{formatDate dataInicial}}
+      e
+      {{formatDate dataFinal}}
+    </h2>
+
+    {{#if faturamentoTotalProdutosPorNome.length}}
+      <table>
+        <thead>
+          <tr>
+            <th style='text-align: center;'></th>
+            <th style='text-align: center;'>Nome produto</th>
+            <th style='text-align: center;'>Qtd.</th>
+            <th style='text-align: center;'>Faturamento</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each faturamentoTotalProdutosPorNome}}
+            <tr>
+              <td style='text-align: center;'>{{tipoProduto}}</td>
+              <td style='text-align: center;'>{{nomeProduto}}</td>
+              <td style='text-align: center;'>{{qtdVendida}}</td>
+              <td style='text-align: center;'>{{faturamentoTotal}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      <br />
+      <h3>Faturamento total por tipo de produto</h3>
+      {{#each faturamentoTotalProdutosPorTipo}}
+        <div style='margin-left: 60px; font-size:18px;'>{{@key}}: {{this}}</div>
+      {{/each}}
+    {{else}}
+      <h3 style='text-align: center; color: red;'>Nenhum produto comercializado.</h3>
+    {{/if}}
+
+  </body>
+</html>

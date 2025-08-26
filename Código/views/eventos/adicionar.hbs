@@ -1,0 +1,110 @@
+<head>
+  <title>Eventos Luz da Lua</title>
+</head>
+
+<div class='content'>
+  <div class='form-wrapper'>
+    <h2>Cadastrar evento Luz da Lua</h2>
+
+    {{#if messages.sucesso}}
+      <div class='alert alert-success alert-dismissible fade show fs-3' role='alert'>
+        {{messages.sucesso}}
+        Clique
+        <a href='/eventos/gerenciar/{{novoEventoId}}'>aqui</a>
+        para visualizar o evento cadastrado
+        <button
+          type='button'
+          class='btn-close'
+          data-bs-dismiss='alert'
+          aria-label='Fechar'
+        ></button>
+      </div>
+    {{/if}}
+
+    {{#if messages.erros}}
+      <div class='alert alert-danger alert-dismissible fade show fs-3' role='alert'>
+        {{{messages.erros}}}
+        <button
+          type='button'
+          class='btn-close'
+          data-bs-dismiss='alert'
+          aria-label='Fechar'
+        ></button>
+      </div>
+    {{/if}}
+
+    <form id='Form' action='/eventos/adicionar' method='POST'>
+      <div class='mb-3'>
+        <label for='titulo' class='form-label'>Título:</label>
+        <input
+          type='text'
+          name='titulo'
+          class='form-control'
+          placeholder='Informe o título'
+          value='{{evento.titulo}}'
+        />
+      </div>
+      <div class='mb-3'>
+        <label for='objetivo' class='form-label'>Objetivo:</label>
+        <select class='form-select form-control' name='objetivo'>
+          <option value='-1' selected disabled>Selecione um objetivo</option>
+          <option value='Filme'>Filme</option>
+          <option value='Palestra'>Palestra</option>
+          <option value='Show'>Show</option>
+          <option value='Teatro'>Teatro</option>
+        </select>
+      </div>
+      <div class='mb-3'>
+        <label for='valorDoIngressoInteira' class='form-label'>Valor do ingresso:</label>
+        <input
+          type='text'
+          name='valorIngressoInteira'
+          class='form-control valor'
+          placeholder='Informe o valor do ingresso'
+          value='{{evento.valorIngressoInteira}}'
+        />
+      </div>
+      <div class='mb-3'>
+        <label for='qtdIngressosParaVendaDisponibilizados' class='form-label'>Quantidade de
+          ingressos pagos disponibilizados:</label>
+        <input
+          type='text'
+          name='qtdIngressosParaVendaDisponibilizados'
+          class='form-control valor-inteiro'
+          placeholder='Informe a quantidade'
+          value='{{evento.qtdIngressosParaVendaDisponibilizados}}'
+        />
+      </div>
+      <div class='mb-3'>
+        <label for='qtdIngressosGratuitosDisponibilizados' class='form-label'>Quantidade de
+          ingressos gratuitos disponibilizados:</label>
+        <input
+          type='text'
+          name='qtdIngressosGratuitosDisponibilizados'
+          class='form-control valor-inteiro'
+          placeholder='Informe a quantidade'
+          value='{{evento.qtdIngressosGratuitosDisponibilizados}}'
+        />
+      </div>
+      <div class='mb-3'>
+        <label for='informacoesComplementares' class='form-label'>Informações complementares:</label>
+        <textarea
+          name='informacoesComplementares'
+          rows='20'
+          class='form-control'
+          style='border: 1px solid black; height: 100px;'
+          placeholder='Informe as informações complementares(Opcional)'
+        >{{evento.informacoesComplementares}}</textarea>
+      </div>
+      <div>
+        <button type='submit' class='button-cadastrar'>Cadastrar</button>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Scripts -->
+<script src='https://code.jquery.com/jquery-3.7.0.min.js'></script>
+<link rel='stylesheet' href='https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css' />
+<script src='https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js'></script>
+<script src='/js/onlyFloatInput.js'></script>
+<script src='/js/onlyIntegerInput.js'></script>

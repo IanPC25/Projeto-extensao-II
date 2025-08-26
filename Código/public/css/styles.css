@@ -1,0 +1,416 @@
+/*---------------------------Página---------------------------*/
+body {
+  display: flex;
+  min-height: 100vh;
+}
+
+/*---------------------------SIDEBAR---------------------------*/
+.sidebar {
+  width: 280px;
+  background-color: #000000;
+  padding-top: 20px;
+  color: #fff;
+  height: 100vh;
+  position: fixed;
+}
+
+.sidebar a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 20px;
+  display: block;
+  cursor: pointer;
+}
+
+.sidebar a:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.sidebar a:hover {
+  background-color: #495057;
+}
+
+.nav-link.active {
+  background-color: #495057;
+  color: white !important;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.submenu {
+  padding-left: 30px;
+  display: none;
+}
+
+.submenu.show {
+  display: block;
+}
+
+.menu-item {
+  position: relative;
+}
+
+.menu-toggle::after {
+  content: '▶';
+  position: absolute;
+  right: 20px;
+  color: white;
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.menu-toggle.open::after {
+  content: '▼';
+  color: white;
+}
+
+/*---------------------------Conteúdo principal---------------------------*/
+.content {
+  margin: 0 auto;
+  width: calc(100% - 210px);
+  padding: 50px;
+  background-color: white;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.form-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.form-wrapper h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/*---------------------------Formulário---------------------------*/
+#Form .form-label {
+  font-weight: 500;
+  font-size: 25px;
+}
+
+#Form .form-control {
+  height: 50px;
+  font-size: 25px;
+}
+
+#Form .button-cadastrar,
+#Form .button-editar,
+#Form .button-encerrar {
+  height: 60px;
+  width: 100%;
+  margin-bottom: 40px;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border: 2px solid white;
+  border-radius: 0.375rem;
+  font-size: 1.5rem;
+}
+
+#Form .button-cadastrar {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+#Form .button-editar {
+  background-color: #ffc107;
+  color: #000;
+}
+
+#Form .button-encerrar {
+  background-color: #198754;
+  color: #fff;
+}
+
+#Form input,
+#Form select {
+  border: 1px solid black;
+}
+
+#Form .disabled-input {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+#Form .link {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 1.4rem;
+}
+
+#Form .data-alert {
+  color: red;
+  font-weight: bold;
+  font-size: 1.25;
+}
+
+#Form .select-multiple {
+  height: 150px;
+}
+
+/*------------------------Página de detalhes-------------------*/
+.fieldset-custom {
+  background-color: #f0f0f0;
+}
+
+.item-detail {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.label-detail {
+  font-weight: 500;
+  font-size: 25px;
+  margin-bottom: 0.25rem;
+}
+
+.indent {
+  text-indent: 40px;
+}
+
+.value-detail {
+  font-size: 25px;
+  text-indent: 20px;
+}
+
+.no-registered-detail {
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.item-detail-billing {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.item-detail-billing .label-detail {
+  font-weight: 500;
+  font-size: 25px;
+  margin-right: 0.5rem;
+  margin-bottom: 0;
+}
+
+.item-detail-billing .value-detail-billing {
+  font-size: 25px;
+}
+
+.fieldset-detail {
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.legend-detail {
+  float: none;
+  width: auto;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.row-header {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.row-header .col-item {
+  font-weight: 500;
+  font-size: 25px;
+  padding: 0.5rem;
+}
+
+/*---------------------------Tabs---------------------------*/
+.nav-tabs .nav-link {
+  background-color: #000;
+  color: #fff;
+  border: 1px solid #000;
+  border-radius: 6px 6px 0 0;
+  font-size: 25px;
+}
+
+.nav-tabs .nav-link:hover,
+.nav-tabs .nav-link:focus {
+  color: #fff;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-link.active:focus,
+.nav-tabs .nav-link.active:hover {
+  background-color: #fff;
+  color: #000;
+  font-size: 25px;
+  box-shadow: none;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-link.active:focus,
+.nav-tabs .nav-link.active:hover {
+  color: #000 !important;
+}
+
+#link-close,
+.link-delete {
+  text-align: center;
+  font-weight: normal;
+  font-size: 25px;
+}
+
+#link-description-close {
+  text-align: center;
+  font-size: 25px;
+}
+
+/*---------------------------Tabelas---------------------------*/
+table {
+  display: table;
+  margin-top: 50px;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+table thead th,
+table tbody td {
+  text-align: center !important;
+  font-size: 1.25rem;
+  vertical-align: middle;
+  border: 1px solid #dee2e6;
+  padding: 0.75rem;
+  vertical-align: middle;
+}
+
+table tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+table .button-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+table .button-group form {
+  display: inline-flex;
+  margin: 0;
+  padding: 0;
+}
+
+/*---------------------------Datatables---------------------------*/
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  background-color: white;
+  color: black !important;
+  font-size: 20px;
+  border: 1px solid;
+  border-radius: 4px;
+  padding: 5px 10px;
+  margin: 2px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+  background-color: #0d6efd !important;
+  color: white !important;
+}
+
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter,
+.dataTables_wrapper .dataTables_info {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/*---------------------------Botão voltar---------------------------*/
+.back-button {
+  display: inline-block;
+  background-color: #6c757d;
+  color: #fff;
+  font-size: 1.25rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #6c757d;
+  border-radius: 0.375rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out;
+}
+
+.back-button:hover {
+  background-color: #5c636a;
+  border-color: #565e64;
+  text-decoration: none;
+}
+
+/*-------------------- Lista de dados no corpo do html--------------------*/
+.col-item {
+  font-size: 25px;
+  text-align: center;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+}
+
+.row > div {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.link-status {
+  text-decoration: underline;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.link-status:hover {
+  color: #0a58ca;
+  font-weight: normal;
+}
+
+.title-center {
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.row.data-row {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  align-items: center;
+}
+
+.row.data-row:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/*------------------------------Botões para gerar formulário------------------------*/
+#link-description-report {
+  text-align: center;
+  font-size: 25px;
+}
+
+#link-report {
+  text-align: center;
+  font-weight: normal;
+  font-size: 25px;
+}

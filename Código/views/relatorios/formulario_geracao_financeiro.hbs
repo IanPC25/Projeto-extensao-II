@@ -1,0 +1,78 @@
+<head>
+  <title>Relatórios</title>
+</head>
+
+<div class='content'>
+  <div class='form-wrapper'>
+    <h2>Relatório financeiro das reservas e dos eventos encerrados</h2>
+
+    <div id='link-description-report'>
+      <p>Para gerar o relatório, é necessário:</p>
+      1 - Selecionar um tipo de relatório.
+      <br />2 - Preencher as datas.
+      <br />3 - Clicar no botão
+      <strong>Gerar relatório</strong>.
+
+      {{#if messages.sucesso}}
+        <div class='alert alert-success alert-dismissible fade show fs-3' role='alert'>
+          {{{messages.sucesso}}}
+          <button
+            type='button'
+            class='btn-close'
+            data-bs-dismiss='alert'
+            aria-label='Fechar'
+          ></button>
+        </div>
+      {{/if}}
+
+      {{#if messages.erros}}
+        <div class='alert alert-danger alert-dismissible fade show fs-3' role='alert'>
+          {{{messages.erros}}}
+          <button
+            type='button'
+            class='btn-close'
+            data-bs-dismiss='alert'
+            aria-label='Fechar'
+          ></button>
+        </div>
+      {{/if}}
+
+    </div>
+    <br />
+    <form
+      id='Form'
+      action='/relatorios/financeiro-pdf'
+      method='GET'
+      style='max-width: 500px; margin: 0 auto;'
+    >
+      <div class='mb-3'>
+        <label for='tipoRelatorio' class='form-label'>Tipo de relatório:</label>
+        <select class='form-select form-control' name='tipoRelatorio'>
+          <option value='Eventos'>Eventos</option>
+          <option value='Produtos'>Produtos vendidos em eventos</option>
+          <option value='Reservas'>Reservas</option>
+
+        </select>
+      </div>
+
+      <div class='mb-3'>
+        <label for='dataInicial' class='form-label'>Data inicial:</label>
+        <input type='date' class='form-control' name='dataInicial' value='{{dataInicial}}' />
+      </div>
+      <div class='mb-3'>
+        <label for='dataFinal' class='form-label'>Data final:</label>
+        <input type='date' class='form-control' name='dataFinal' value='{{dataFinal}}' />
+      </div>
+      <div>
+        <button type='submit' class='button-cadastrar'>Gerar relatório</button>
+      </div>
+    </form>
+
+  </div>
+</div>
+<!-- Scripts -->
+<script src='https://code.jquery.com/jquery-3.7.0.min.js'></script>
+<link rel='stylesheet' href='https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css' />
+<script src='https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js'></script>
+<script src='/js/onlyFloatInput.js'></script>
+<script src='/js/onlyIntegerInput.js'></script>

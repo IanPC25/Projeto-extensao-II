@@ -1,0 +1,60 @@
+body {
+    background-color: #e9ecef;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 800px;
+  min-height: 550px;
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 28px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-container h2 {
+  font-size: 24px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.form-control {
+  height: 70px;
+  font-size: 30px;
+}
+
+.input-group-text {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.form-label {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+@media (max-width: 576px) {
+  .login-container {
+    padding: 25px;
+    max-width: 90%;
+    min-height: 500px;
+  }
+
+  .form-label,
+  .form-control,
+  .btn-dark {
+    font-size: 18px;
+    height: 48px;
+  }
+
+  .login-container h2 {
+    font-size: 24px;
+  }
+
+  .input-group-text {
+    font-size: 20px;
+  }
+}

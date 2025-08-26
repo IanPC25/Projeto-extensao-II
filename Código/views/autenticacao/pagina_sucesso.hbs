@@ -1,0 +1,18 @@
+<head>
+  <title>Bem-vindo</title>
+</head>
+
+<div class="content">
+  <div class="form-wrapper">
+    {{#if messages.message}}
+      <div class="d-flex justify-content-center">
+        <div
+          class="alert alert-success alert-dismissible fade show text-center w-100 py-4 fs-3"
+          role="alert"
+        >
+          {{messages.message}}
+        </div>
+      </div>
+    {{/if}}
+  </div>
+</div>

@@ -1,0 +1,456 @@
+<head>
+  <title>Gerenciando reserva</title>
+</head>
+
+<div class='content'>
+  <div class='form-wrapper'>
+    <a href='javascript:history.back()' class='back-button'>Voltar</a>
+    <h2>Gerenciar reserva</h2>
+    <!-- Mensagens de erros-->
+    {{#if messages.erros}}
+      <div class='alert alert-danger alert-dismissible fade show fs-3' role='alert'>
+        {{{messages.erros}}}
+        <button
+          type='button'
+          class='btn-close'
+          data-bs-dismiss='alert'
+          aria-label='Fechar'
+        ></button>
+      </div>
+    {{/if}}
+
+    <!-- Mensagens de sucessos-->
+    {{#if messages.sucesso}}
+      <div class='alert alert-success alert-dismissible fade show fs-3' role='alert'>
+        {{messages.sucesso}}
+        <button
+          type='button'
+          class='btn-close'
+          data-bs-dismiss='alert'
+          aria-label='Fechar'
+        ></button>
+      </div>
+    {{/if}}
+
+    <ul class='nav nav-tabs' id='formTabs' role='tablist'>
+      <li class='nav-item' role='presentation'>
+        <button
+          class='nav-link active'
+          id='aba1-tab'
+          data-bs-toggle='tab'
+          data-bs-target='#aba_editar'
+          type='button'
+          role='tab'
+        >
+          Edição
+        </button>
+      </li>
+      <li class='nav-item' role='presentation'>
+        <button
+          class='nav-link'
+          id='aba2-tab'
+          data-bs-toggle='tab'
+          data-bs-target='#aba_responsavel'
+          type='button'
+          role='tab'
+        >
+          Responsáveis
+        </button>
+      </li>
+      <li class='nav-item' role='presentation'>
+        <button
+          class='nav-link'
+          id='aba2-tab'
+          data-bs-toggle='tab'
+          data-bs-target='#aba_periodo'
+          type='button'
+          role='tab'
+        >
+          Períodos
+        </button>
+      </li>
+      <li class='nav-item' role='presentation'>
+        <button
+          class='nav-link'
+          id='aba2-tab'
+          data-bs-toggle='tab'
+          data-bs-target='#aba_pagamento'
+          type='button'
+          role='tab'
+        >
+          Pagamento
+        </button>
+      </li>
+      <li class='nav-item' role='presentation'>
+        <button
+          class='nav-link'
+          id='aba3-tab'
+          data-bs-toggle='tab'
+          data-bs-target='#aba_encerramento'
+          type='button'
+          role='tab'
+        >
+          Encerrar
+        </button>
+      </li>
+    </ul>
+
+    <div class='tab-content p-3 border border-top-0' id='formTabsContent'>
+      <div class='tab-pane fade show active' id='aba_editar' role='tabpanel'>
+        <form id='Form' action='/reservas/editar' method='POST'>
+          <input type='hidden' name='reservaId' value={{reservaId}} />
+          <div class='mb-3'>
+            <label for='titulo' class='form-label'>Título:</label>
+            <input
+              type='text'
+              name='titulo'
+              class='form-control'
+              placeholder='Informe um título para a alocação'
+              value='{{reserva.titulo}}'
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='objetivo' class='form-label'>Objetivo:</label>
+            <select class='form-select form-control' name='objetivo'>
+              <option value='{{reserva.objetivo}}'>{{reserva.objetivo}}</option>
+              <option value='Filme'>Filme</option>
+              <option value='Palestra'>Palestra</option>
+              <option value='Show'>Show</option>
+              <option value='Teatro'>Teatro</option>
+              <option value='Teatro'>Treinamento</option>
+            </select>
+          </div>
+          <div class='mb-3'>
+            <label for='valorDaReserva' class='form-label'>Valor:</label>
+            <input
+              type='text'
+              name='valorDaReserva'
+              class='form-control valor'
+              placeholder='Informe o valor da reserva'
+              value='{{reserva.valorDaReserva}}'
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='informacoesComplementares' class='form-label'>Informações complementares:</label>
+            <textarea
+              name='informacoesComplementares'
+              rows='20'
+              class='form-control'
+              style='border: 1px solid black; height: 100px;'
+              placeholder='Informe uma descrição'
+            >{{reserva.informacoesComplementares}}</textarea>
+          </div>
+          <div>
+            <button type='submit' class='button-editar'>Editar</button>
+          </div>
+        </form>
+      </div>
+
+      <div class='tab-pane fade' id='aba_responsavel' role='tabpanel'>
+        <form id='Form' action='/reservas/responsaveis/adicionar' method='POST'>
+          <input type='hidden' name='reservaId' value={{reservaId}} />
+          <div class='mb-3'>
+            <label for='nome' class='form-label'>Responsável:</label>
+            <input
+              type='text'
+              name='nome'
+              class='form-control'
+              placeholder='Informe o nome do responsável pela reserva'
+              value='{{responsavel.nome}}'
+            />
+          </div>
+
+          <div class='mb-3'>
+            <label for='telefone' class='form-label'>Telefone:</label>
+            <input
+              type='text'
+              name='telefone'
+              class='form-control'
+              placeholder='Informe o telefone do responsável pela reserva'
+              value='{{responsavel.telefone}}'
+            />
+          </div>
+
+          <div class='mb-3'>
+            <label for='celular' class='form-label'>Celular:</label>
+            <input
+              type='text'
+              name='celular'
+              class='form-control'
+              placeholder='Informe o celular do responsável pela reserva'
+              value='{{responsavel.celular}}'
+            />
+          </div>
+
+          <div class='mb-3'>
+            <label for='email' class='form-label'>Email:</label>
+            <input
+              type='text'
+              name='email'
+              class='form-control'
+              placeholder='Informe o email do responsável pela reserva'
+              value='{{responsavel.email}}'
+            />
+          </div>
+
+          <div class='mb-3'>
+            <label for='uf' class='form-label'>Estado (UF):</label>
+            <select id='uf' name='uf' class='form-select form-control'>
+              <option value='{{responsavel.uf}}' disabled selected>Selecione o estado de origem do
+                responsável pela reserva
+              </option>
+            </select>
+          </div>
+
+          <div class='mb-3'>
+            <label for='cidade' class='form-label'>Cidade:</label>
+            <input
+              type='text'
+              name='cidade'
+              class='form-control'
+              placeholder='Informe a cidade de origem do responsável pela reserva'
+              value='{{responsavel.cidade}}'
+            />
+          </div>
+          <div>
+            <button type='submit' class='button-cadastrar'>Cadastrar</button>
+          </div>
+        </form>
+        {{#if responsaveis.length}}
+          <div class='col-12 title-center'>Responsáveis</div>
+          <div class='row data-row' style='font-weight: bold;'>
+            <div class='col col-item'>Nome</div>
+            <div class='col col-item'>Contatos</div>
+            <div class='col col-item'>Email</div>
+            <div class='col col-item'>Localidade</div>
+            <div class='col col-item'></div>
+          </div>
+        {{else}}
+          <div class='no-registered-detail'>
+            Nenhum responsável cadastrado.
+          </div>
+        {{/if}}
+        {{#each responsaveis}}
+          <div class='row data-row'>
+            <div class='col col-item'>{{nome}}</div>
+            <div class='col col-item'>{{telefone}} <br /> {{celular}}</div>
+            <div class='col col-item'>{{email}}</div>
+            <div class='col col-item'>{{cidade}} - {{uf}}</div>
+            <div class='col col-item'>
+              <form
+                action='/reservas/responsaveis/remover/{{id}}'
+                method='POST'
+                style='display:inline;'
+              >
+                <input type='hidden' name='reservaId' value='{{reservaId}}' />
+                <button type='submit' class='btn btn-link' style='font-size: 25px;'>
+                  Excluir
+                </button>
+              </form>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+
+      <div class='tab-pane fade' id='aba_periodo' role='tabpanel'>
+        <form id='Form' action='/periodos/adicionar-para-reserva' method='POST'>
+          <input type='hidden' name='reservaId' value={{reservaId}} />
+          <div class='mb-3'>
+            <label for='data' class='form-label'>Data:</label>
+            <input type='date' class='form-control' name='data' value='{{periodo.data}}' />
+          </div>
+          <div class='mb-3'>
+            <label for='horarioInicio' class='form-label'>Horário de início:</label>
+            <input
+              type='time'
+              class='form-control'
+              name='horarioInicio'
+              value='{{periodo.horarioInicio}}'
+              step='60'
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='horarioTermino' class='form-label'>Horário de término:</label>
+            <input
+              type='time'
+              class='form-control'
+              name='horarioTermino'
+              value='{{periodo.horarioTermino}}'
+              step='60'
+            />
+          </div>
+          <div>
+            <button type='submit' class='button-cadastrar'>Cadastrar</button>
+          </div>
+        </form>
+        {{#if periodos.length}}
+          <div class='col-12 title-center'>Períodos</div>
+          <div class='row data-row' style='font-weight: bold;'>
+            <div class='col col-item'>Data</div>
+            <div class='col col-item'>Horário</div>
+            <div class='col col-item'></div>
+          </div>
+        {{else}}
+          <div class='no-registered-detail'>
+            Nenhum período cadastrado.
+          </div>
+        {{/if}}
+        {{#each periodos}}
+          <div class='row data-row'>
+            <div class='col col-item'>{{formatDate data}}</div>
+            <div class='col col-item'>das
+              {{formatTime horarioInicio}}
+              às
+              {{formatTime horarioTermino}}</div>
+            <div class='col col-item'>
+              <form
+                action='/periodos/remover-da-reserva/{{id}}'
+                method='POST'
+                style='display:inline;'
+              >
+                <input type='hidden' name='reservaId' value='{{reservaId}}' />
+                <button type='submit' class='btn btn-link' style='font-size: 25px;'>
+                  Excluir
+                </button>
+              </form>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+
+      <div class='tab-pane fade' id='aba_pagamento' role='tabpanel'>
+        <form id='Form' action='/reservas/pagamentos/adicionar' method='POST'>
+          <input type='hidden' name='reservaId' value={{reservaId}} />
+          <div class='mb-3'>
+            <label for='valor' class='form-label'>Valor da reserva:</label>
+            <input
+              type='text'
+              name='valor'
+              class='form-control'
+              value='{{reserva.valorDaReserva}}'
+              disabled
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='valor' class='form-label'>Valor quitado até o momento:</label>
+            <input
+              type='text'
+              name='valor'
+              class='form-control valor'
+              value='{{reserva.valorQuitadoDaReserva}}'
+              disabled
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='valor' class='form-label'>Valor restante para quitar a reserva:</label>
+            <input
+              type='text'
+              name='valor'
+              class='form-control valor'
+              value='{{reserva.valorPendenteDaReserva}}'
+              disabled
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='dataPagamento' class='form-label'>Data do pagamento:</label>
+            <input
+              type='date'
+              class='form-control'
+              name='dataPagamento'
+              value='{{pagamento.dataPagamento}}'
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='formaPagamento' class='form-label'>Forma de pagamento:</label>
+            <select class='form-select form-control' name='formaPagamento'>
+              <option value='-1' selected disabled>Selecione uma forma de pagamento</option>
+              <option value='Dinheiro'>Dinheiro</option>
+              <option value='Pix'>Pix</option>
+              <option value='Debito'>Débito</option>
+              <option value='Credito'>Crédito</option>
+            </select>
+          </div>
+          <div class='mb-3'>
+            <label for='responsavelPagamento' class='form-label'>Responsável:</label>
+            <input
+              type='text'
+              name='responsavelPagamento'
+              class='form-control'
+              placeholder='Informe o responsável pelo pagamento'
+              value='{{pagamento.responsavelPagamento}}'
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='valorPago' class='form-label'>Valor pago:</label>
+            <input
+              type='text'
+              name='valorPago'
+              class='form-control valor'
+              value='{{pagamento.valorPago}}'
+              placeholder='Informe o valor pago'
+            />
+          </div>
+          <div>
+            <button type='submit' class='button-cadastrar'>Cadastrar</button>
+          </div>
+        </form>
+        {{#if pagamentos.length}}
+          <div class='col-12 title-center'>Pagamentos</div>
+          <div class='row data-row' style='font-weight: bold;'>
+            <div class='col col-item'>Data</div>
+            <div class='col col-item'>Responsável</div>
+            <div class='col col-item'>Forma</div>
+            <div class='col col-item'>Valor</div>
+            <div class='col col-item'></div>
+          </div>
+        {{else}}
+          <div class='no-registered-detail'>
+            Nenhum pagamento cadastrado.
+          </div>
+        {{/if}}
+        {{#each pagamentos}}
+          <div class='row data-row'>
+            <div class='col col-item'>{{formatDate dataPagamento}}</div>
+            <div class='col col-item'>{{responsavelPagamento}}</div>
+            <div class='col col-item'>{{formaPagamento}}</div>
+            <div class='col col-item'>{{valorPago}}</div>
+            <div class='col col-item'>
+              <form
+                action='/reservas/pagamentos/remover/{{id}}'
+                method='POST'
+                style='display:inline;'
+              >
+                <input type='hidden' name='reservaId' value={{reservaId}} />
+                <button type='submit' class='btn btn-link' style='font-size: 25px;'>
+                  Excluir
+                </button>
+              </form>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+
+      <div class='tab-pane fade' id='aba_encerramento' role='tabpanel'>
+        <div id='link-description-close'>
+          <h4 id='link-close'>
+            Clique no link abaixo para encerrar a alocação.
+          </h4>
+          <form action='/reservas/encerrar/{{reservaId}}' method='POST' style='display:inline;'>
+            <button type='submit' class='btn btn-link' style='font-size: 25px;'>
+              Encerrar
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src='https://code.jquery.com/jquery-3.7.0.min.js'></script>
+<link rel='stylesheet' href='https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css' />
+<script src='https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js'></script>
+<script src='/js/datatables.js'></script>
+<script src='/js/input_masks.js'></script>
+<script src='/js/uf-select.js'></script>
+<script src='/js/onlyFloatInput.js'></script>

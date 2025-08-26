@@ -1,0 +1,88 @@
+<head>
+  <title>Reservas Luz da Lua</title>
+</head>
+
+<div class='content'>
+  <div class='form-wrapper'>
+    <h2>Cadastrar reserva do espaço para terceiros</h2>
+
+    {{#if messages.sucesso}}
+      <div class='alert alert-success alert-dismissible fade show fs-3' role='alert'>
+        {{messages.sucesso}}
+        Clique
+        <a href='/reservas/gerenciar/{{novaReservaId}}'>aqui</a>
+        para visualizar a reserva cadastrada
+        <button
+          type='button'
+          class='btn-close'
+          data-bs-dismiss='alert'
+          aria-label='Fechar'
+        ></button>
+      </div>
+    {{/if}}
+
+    {{#if messages.erros}}
+      <div class='alert alert-danger alert-dismissible fade show fs-3' role='alert'>
+        {{{messages.erros}}}
+        <button
+          type='button'
+          class='btn-close'
+          data-bs-dismiss='alert'
+          aria-label='Fechar'
+        ></button>
+      </div>
+    {{/if}}
+
+    <form id='Form' action='/reservas/adicionar' method='POST'>
+      <div class='mb-3'>
+        <label for='titulo' class='form-label'>Título:</label>
+        <input
+          type='text'
+          name='titulo'
+          class='form-control'
+          placeholder='Informe um título para a alocação'
+          value='{{reserva.titulo}}'
+        />
+      </div>
+      <div class='mb-3'>
+        <label for='objetivo' class='form-label'>Objetivo:</label>
+        <select class='form-select form-control' name='objetivo'>
+          <option value='-1' selected disabled>Selecione um objetivo para a reserva</option>
+          <option value='Filme'>Filme</option>
+          <option value='Palestra'>Palestra</option>
+          <option value='Show'>Show</option>
+          <option value='Teatro'>Teatro</option>
+          <option value='Treinamento'>Treinamento</option>
+        </select>
+      </div>
+      <div class='mb-3'>
+        <label for='valorDaReserva' class='form-label'>Valor:</label>
+        <input
+          type='text'
+          name='valorDaReserva'
+          class='form-control valor'
+          placeholder='Informe o valor da reserva do espaço'
+          value='{{reserva.valorDaReserva}}'
+        />
+      </div>
+      <div class='mb-3'>
+        <label for='informacoesComplementares' class='form-label'>Informações complementares:</label>
+        <textarea
+          name='informacoesComplementares'
+          rows='20'
+          class='form-control'
+          style='border: 1px solid black; height: 100px;'
+          placeholder='Informe as informações complementares(Opcional)'
+        >{{reserva.informacoesComplementares}}</textarea>
+      </div>
+      <div>
+        <button type='submit' class='button-cadastrar'>Cadastrar</button>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Scripts -->
+<script src='https://code.jquery.com/jquery-3.7.0.min.js'></script>
+<link rel='stylesheet' href='https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css' />
+<script src='https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js'></script>
+<script src='/js/onlyFloatInput.js'></script>
