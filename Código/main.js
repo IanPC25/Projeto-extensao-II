@@ -84,7 +84,6 @@ app.whenReady().then(() => {
   const serverScript = path.join(__dirname, 'index.js');
 
   if (isDev) {
-    // CORREÇÃO: usa process.execPath (funciona com espaços no caminho)
     serverProcess = spawn(process.execPath, [serverScript], { cwd: __dirname });
 
     serverProcess.stdout.on('data', (data) => console.log(`SERVER: ${data}`));

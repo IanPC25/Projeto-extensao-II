@@ -55,7 +55,6 @@ module.exports = class EventoController {
     try {
       const { dataInicial, dataFinal, tipoRelatorio } = req.query;
 
-      // Validação das datas
       if (!dataInicial && !dataFinal) {
         req.flash('erros', 'As datas inicial e final devem ser informadas.');
         return res.render('relatorios/formulario_geracao_financeiro', { dataInicial, dataFinal });

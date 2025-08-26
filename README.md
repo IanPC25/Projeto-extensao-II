@@ -70,7 +70,6 @@
 
 - Baixar nodejs
 - Instalar o nodejs
-- Abrir a pasta Código
 - Abrir o terminal com a pasta Código
 - Digitar npm install
 - Digitar npm run build
